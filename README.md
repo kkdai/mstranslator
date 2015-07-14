@@ -30,8 +30,8 @@ Sign-up for Microsoft Translator API (see [here](http://blogs.msdn.com/b/transla
         	"fmt"
         	"log"
         
-        	ms "kkdai/mstranslator"
-        )
+                ms "github.com/kkdai/mstranslator"
+                )
         
         func main() {
         	msTranslator := ms.Translator{}
@@ -56,6 +56,7 @@ Implemented APIs
 - [Detect](https://msdn.microsoft.com/en-us/library/ff512411.aspx)
 - [GetLanguageNames](https://msdn.microsoft.com/en-us/library/ff512414.aspx)
 - [GetLanguagesForTranslate](https://msdn.microsoft.com/en-us/library/ff512416.aspx)
+- [GetTranslations](https://msdn.microsoft.com/en-us/library/ff512417.aspx)
 - [Translate](https://msdn.microsoft.com/en-us/library/ff512421.aspx)
 - [TransformText](https://msdn.microsoft.com/en-us/library/dn876735.aspx)
 
@@ -68,7 +69,6 @@ Unimplement APIs (Yet)
 - [BreakSentences](https://msdn.microsoft.com/en-us/library/ff512410.aspx)
 - [DetectArray](https://msdn.microsoft.com/en-us/library/ff512412.aspx)        
 - [GetLanguagesForSpeak](https://msdn.microsoft.com/en-us/library/ff512415.aspx)
-- [GetTranslations](https://msdn.microsoft.com/en-us/library/ff512417.aspx)
 - [GetTranslationsArray](https://msdn.microsoft.com/en-us/library/ff512418.aspx)
 - [Speak](https://msdn.microsoft.com/en-us/library/ff512420.aspx)
 - [TranslateArray](https://msdn.microsoft.com/en-us/library/ff512422.aspx)
