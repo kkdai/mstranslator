@@ -14,3 +14,10 @@ type ResponseXML struct {
 	Namespace string   `xml:"xmlns,attr"`
 	Value     string   `xml:",innerxml"`
 }
+
+type ResponseArray struct {
+	XMLName           xml.Name `xml:"ArrayOfstring"`
+	Namespace         string   `xml:"xmlns,attr"`
+	InstanceNamespace string   `xml:"xmlns:i,attr"`
+	Strings           []string `xml:"string"`
+}

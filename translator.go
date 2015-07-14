@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
+	"strings"
 
 	"github.com/st3v/tracerr"
 )
@@ -26,6 +27,14 @@ type Translator struct {
 	ClientId     string
 	ClientSecret string
 	ClientToken  string
+}
+
+func getXMLArrayFromString(values []string) *ResponseArray {
+	return &ResponseArray{
+		Namespace:         "http://schemas.microsoft.com/2003/10/Serialization/Arrays",
+		InstanceNamespace: "http://www.w3.org/2001/XMLSchema-instance",
+		Strings:           values,
+	}
 }
 
 func doConnect(data url.Values, token string, result interface{}) error {
@@ -117,11 +126,44 @@ func (b *Translator) Detect(text string) (string, error) {
 		return "", tracerr.Wrap(err)
 	}
 
-	translation := &ResponseXML{}
-	err = xml.Unmarshal(body, &translation)
+	retDetect := &ResponseXML{}
+	err = xml.Unmarshal(body, &retDetect)
 	if err != nil {
 		return "", tracerr.Wrap(err)
 	}
 
-	return translation.Value, nil
+	return retDetect.Value, nil
+}
+
+func (b *Translator) GetLanguageNames(codes []string) ([]string, error) {
+	if b.ClientToken == "" {
+		b.connect()
+	}
+
+	payload, _ := xml.Marshal(getXMLArrayFromString(codes))
+	uri := fmt.Sprintf("%s?locale=en", GetLanguageNamesURL)
+
+	client := &http.Client{}
+	request, err := http.NewRequest("POST", uri, strings.NewReader(string(payload)))
+	request.Header.Add("Content-Type", "text/xml")
+	request.Header.Add("Authorization", "Bearer "+b.ClientToken)
+
+	response, err := client.Do(request)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+
+	body, err := ioutil.ReadAll(response.Body)
+	defer response.Body.Close()
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+
+	retLangs := &ResponseArray{}
+	err = xml.Unmarshal(body, &retLangs)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+
+	return retLangs.Strings, nil
 }
