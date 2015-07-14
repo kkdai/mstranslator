@@ -2,6 +2,31 @@ package mstranslator
 
 import "encoding/xml"
 
+type XMLIntValue struct {
+	Text int `xml:",chardata"`
+}
+
+type XMLStringValue struct {
+	Text string `xml:",chardata"`
+}
+
+type GetTranslationsResponse struct {
+	XMLName      xml.Name             `xml:"GetTranslationsResponse"`
+	Translations ResponseTranslations `xml:"Translations"`
+}
+
+type ResponseTranslations struct {
+	TransMatch []ResponseTranslationMatch `xml:"TranslationMatch"`
+}
+
+type ResponseTranslationMatch struct {
+	Count               XMLIntValue    `xml:"Count"`
+	MatchDegree         XMLIntValue    `xml:"MatchDegree"`
+	MatchedOriginalText XMLStringValue `xml:"MatchedOriginalText"`
+	Rating              XMLIntValue    `xml:"Rating"`
+	TranslatedText      XMLStringValue `xml:"TranslatedText"`
+}
+
 type ResponseToken struct {
 	TokenType   string `json:"token_type"`
 	AccessToken string `json:"access_token"`

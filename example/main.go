@@ -49,4 +49,11 @@ func main() {
 	}
 	fmt.Println("Original: ", oriSentence, " Correct to:", retCorrectString)
 
+	//Find a possible translation result for whole setence
+	retGet, err := msTranslator.GetTranslations("una importante contribución a la rentabilidad de la empresa", "es", "en", 5)
+	if err != nil {
+		log.Panicf("Error : %s", err.Error())
+	}
+	fmt.Println(retGet)
+
 }
