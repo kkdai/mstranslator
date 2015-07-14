@@ -9,6 +9,12 @@ type ResponseToken struct {
 	Scope       string `json:"scope"`
 }
 
+type TransformTextResponse struct {
+	ErrorCondition   int    `json:"ec"`       // A positive number representing an error condition
+	ErrorDescriptive string `json:"em"`       // A descriptive error message
+	Sentence         string `json:"sentence"` // transformed text
+}
+
 type ResponseXML struct {
 	XMLName   xml.Name `xml:"string"`
 	Namespace string   `xml:"xmlns,attr"`

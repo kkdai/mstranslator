@@ -15,10 +15,12 @@ import (
 )
 
 const (
-	API_URL                     = "https://datamarket.accesscontrol.windows.net/v2/OAuth2-13/"
-	API_SCOPE                   = "http://api.microsofttranslator.com"
+	API_URL   = "https://datamarket.accesscontrol.windows.net/v2/OAuth2-13/"
+	API_SCOPE = "http://api.microsofttranslator.com"
+
 	ServiceURL                  = "http://api.microsofttranslator.com/v2/Http.svc/"
 	TranslationURL              = ServiceURL + "Translate"
+	TransformTextURL            = "http://api.microsofttranslator.com/V3/json/TransformText"
 	TranslateArray              = ServiceURL + "TranslateArray"
 	DetectURL                   = ServiceURL + "Detect"
 	GetLanguageNamesURL         = ServiceURL + "GetLanguageNames"
@@ -102,6 +104,44 @@ func (t *Translator) Translate(text, from, to string) (string, error) {
 	return translation.Value, nil
 }
 
+func (t *Translator) TransformText(lang, category, text string) (string, error) {
+	if t.ClientToken == "" {
+		t.connect()
+	}
+
+	uri := fmt.Sprintf(
+		"%s?sentence=%s&category=%s&language=%s",
+		TransformTextURL,
+		url.QueryEscape(text),
+		url.QueryEscape(category),
+		url.QueryEscape(lang))
+
+	client := &http.Client{}
+	request, err := http.NewRequest("GET", uri, nil)
+	request.Header.Add("Content-Type", "text/plain")
+	request.Header.Add("Authorization", "Bearer "+t.ClientToken)
+
+	response, err := client.Do(request)
+	if err != nil {
+		return "", tracerr.Wrap(err)
+	}
+
+	body, err := ioutil.ReadAll(response.Body)
+	defer response.Body.Close()
+	if err != nil {
+		return "", tracerr.Wrap(err)
+	}
+
+	body = bytes.TrimPrefix(body, []byte("\xef\xbb\xbf"))
+
+	transTransform := TransformTextResponse{}
+	err = json.Unmarshal(body, &transTransform)
+	if err != nil {
+		return "", tracerr.Wrap(err)
+	}
+
+	return transTransform.Sentence, nil
+}
 func (t *Translator) Detect(text string) (string, error) {
 	if t.ClientToken == "" {
 		t.connect()
