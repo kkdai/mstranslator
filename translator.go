@@ -132,6 +132,7 @@ func (t *Translator) TransformText(lang, category, text string) (string, error) 
 		return "", tracerr.Wrap(err)
 	}
 
+	// Microsoft Server json response contain BOM, need to trim.
 	body = bytes.TrimPrefix(body, []byte("\xef\xbb\xbf"))
 
 	transTransform := TransformTextResponse{}

@@ -1,6 +1,6 @@
 mstranslator
 ======================
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/kkdai/mstranslator/master/LICENSE)  [![GoDoc](https://godoc.org/github.com/kkdai/goFbAlbum?status.svg)](https://godoc.org/github.com/kkdai/mstranslator)  [![Build Status](https://travis-ci.org/kkdai/goFbAlbum.svg?branch=master)](https://travis-ci.org/kkdai/goFbAlbum)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/kkdai/mstranslator/master/LICENSE)  [![GoDoc](https://godoc.org/github.com/kkdai/goFbAlbum?status.svg)](https://godoc.org/github.com/kkdai/mstranslator)  [![Build Status](https://travis-ci.org/kkdai/mstranslator.svg)](https://travis-ci.org/kkdai/mstranslator)
  
 The "mstranslator" is a [Micrsoft Translator Service](https://www.microsoft.com/translator/) client which written by Golang. 
 
