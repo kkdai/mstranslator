@@ -24,6 +24,12 @@ func main() {
 	}
 	fmt.Println("Lang=", retLang)
 
+	retSupportLangcodes, err := msTranslator.GetLanguagesForTranslate()
+	if err != nil {
+		log.Panicf("Error : %s", err.Error())
+	}
+	fmt.Println("LangCodes=", retSupportLangcodes)
+
 	expectedCodes := []string{"en", "de", "es", "ru", "jp"}
 	retLangName, err := msTranslator.GetLanguageNames(expectedCodes)
 	if err != nil {
