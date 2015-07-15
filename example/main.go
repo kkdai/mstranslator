@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	ms "../../go-mstranslator"
+	ms "github.com/kkdai/mstranslator"
 )
 
 func main() {
