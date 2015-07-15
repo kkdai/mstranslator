@@ -34,17 +34,14 @@ Sign-up for Microsoft Translator API (see [here](http://blogs.msdn.com/b/transla
                 )
         
         func main() {
-        	msTranslator := ms.Translator{}
-        	msTranslator.ClientId = "YourClientID"
-        	msTranslator.ClientSecret = "YourClientSecret"
+        	msClient := ms.NewClient("YourClientID", "YourClientSecret")
         
         	//Translate "Hello World" from English to France.
-        	translation, err := msTranslator.Translate("Hello World!", "en", "de")
+        	translation, err := msClient.Translate("Hello World!", "en", "de")
         	if err != nil {
         		log.Panicf("Error : %s", err.Error())
         	}
         	fmt.Println(translation) //Hallo Welt!        
-
         }
 
 Check [example](example/main.go) for more detail.
