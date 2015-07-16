@@ -51,6 +51,7 @@ Implemented APIs
 ---------------
 
 - [Detect](https://msdn.microsoft.com/en-us/library/ff512411.aspx)
+- [DetectArray](https://msdn.microsoft.com/en-us/library/ff512412.aspx)        
 - [GetLanguageNames](https://msdn.microsoft.com/en-us/library/ff512414.aspx)
 - [GetLanguagesForTranslate](https://msdn.microsoft.com/en-us/library/ff512416.aspx)
 - [GetLanguagesForSpeak](https://msdn.microsoft.com/en-us/library/ff512415.aspx)
@@ -65,7 +66,6 @@ Unimplement APIs (Yet)
 - [AddTranslation](https://msdn.microsoft.com/en-us/library/ff512408.aspx)
 - [AddTranslationArray](https://msdn.microsoft.com/en-us/library/ff512409.aspx)
 - [BreakSentences](https://msdn.microsoft.com/en-us/library/ff512410.aspx)
-- [DetectArray](https://msdn.microsoft.com/en-us/library/ff512412.aspx)        
 - [GetTranslationsArray](https://msdn.microsoft.com/en-us/library/ff512418.aspx)
 - [Speak](https://msdn.microsoft.com/en-us/library/ff512420.aspx)
 - [TranslateArray](https://msdn.microsoft.com/en-us/library/ff512422.aspx)

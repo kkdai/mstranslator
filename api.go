@@ -37,6 +37,11 @@ func (c *Client) Detect(text string) (string, error) {
 	return c.languageProvider.Detect(text)
 }
 
+// Use the DetectArray Method to identify the language of an array of string at once. Performs independent detection of each individual array element and returns a result for each row of the array.
+func (c *Client) DetectArray(textArray []string) ([]string, error) {
+	return c.languageProvider.DetectArray(textArray)
+}
+
 //Retrieves an array of translations for a given language pair from the store and the MT engine. GetTranslations differs from Translate as it returns all available translations.
 func (c *Client) GetTranslations(text, from, to string, maxTranslations int) ([]ResponseTranslationMatch, error) {
 	return c.languageProvider.GetTranslations(text, from, to, maxTranslations)

@@ -23,7 +23,15 @@ func main() {
 	if err != nil {
 		log.Panicf("Error : %s", err.Error())
 	}
-	fmt.Println("Inpurt Sentence Language:", retLang)
+	fmt.Println("Input Sentence Language:", retLang)
+
+	//Try to parse input sentence to figure out what language you input.
+	detectTexts := []string{"哈囉", "あいさつ", "Hello"}
+	retLangArray, err := msClient.DetectArray(detectTexts)
+	if err != nil {
+		log.Panicf("Error : %s", err.Error())
+	}
+	fmt.Println("Input Sentence Language Array:", retLangArray)
 
 	//Get all language support by Microsoft Translator.
 	retSupportLangcodes, err := msClient.GetLanguagesForTranslate()

@@ -60,6 +60,36 @@ func (l *LanguageProvider) Detect(text string) (string, error) {
 	return retDetect.Value, nil
 }
 
+func (l *LanguageProvider) DetectArray(text []string) ([]string, error) {
+	token := l.authenicator.GetToken()
+
+	payload, _ := xml.Marshal(getXMLArrayFromString(text))
+
+	client := &http.Client{}
+	request, err := http.NewRequest("POST", DetectArrayURL, strings.NewReader(string(payload)))
+	request.Header.Add("Content-Type", "text/xml")
+	request.Header.Add("Authorization", "Bearer "+token)
+
+	response, err := client.Do(request)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+
+	body, err := ioutil.ReadAll(response.Body)
+	defer response.Body.Close()
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+
+	retDetect := &ResponseArray{}
+	err = xml.Unmarshal(body, &retDetect)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+
+	return retDetect.Strings, nil
+}
+
 func (l *LanguageProvider) GetTranslations(text, from, to string, maxTranslations int) ([]ResponseTranslationMatch, error) {
 	token := l.authenicator.GetToken()
 

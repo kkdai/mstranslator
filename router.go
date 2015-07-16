@@ -11,6 +11,7 @@ const (
 	TranslationURL              = ServiceURL + "Translate"
 	GetTranslationsURL          = ServiceURL + "GetTranslations"
 	DetectURL                   = ServiceURL + "Detect"
+	DetectArrayURL              = ServiceURL + "DetectArray"
 	GetLanguageNamesURL         = ServiceURL + "GetLanguageNames"
 	GetLanguagesForTranslateURL = ServiceURL + "GetLanguagesForTranslate"
 	GetLanguagesForSpeakURL     = ServiceURL + "GetLanguagesForSpeak"
