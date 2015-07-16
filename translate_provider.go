@@ -92,3 +92,32 @@ func (t *TranslateProvider) TransformText(lang, category, text string) (string, 
 
 	return transTransform.Sentence, nil
 }
+
+func (t *TranslateProvider) Speak(text, lang, outFormat string) ([]byte, error) {
+	token := t.authenicator.GetToken()
+
+	uri := fmt.Sprintf(
+		"%s?text=%s&language=%s&format=%s",
+		SpeakURL,
+		url.QueryEscape(text),
+		url.QueryEscape(lang),
+		url.QueryEscape(outFormat))
+
+	client := &http.Client{}
+	request, err := http.NewRequest("GET", uri, nil)
+	request.Header.Add("Authorization", "Bearer "+token)
+
+	var retbuf []byte
+	response, err := client.Do(request)
+	if err != nil {
+		return retbuf, tracerr.Wrap(err)
+	}
+
+	body, err := ioutil.ReadAll(response.Body)
+	defer response.Body.Close()
+	if err != nil {
+		return retbuf, tracerr.Wrap(err)
+	}
+
+	return body, nil
+}

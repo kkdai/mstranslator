@@ -58,6 +58,7 @@ Implemented APIs
 - [GetTranslations](https://msdn.microsoft.com/en-us/library/ff512417.aspx)
 - [Translate](https://msdn.microsoft.com/en-us/library/ff512421.aspx)
 - [TransformText](https://msdn.microsoft.com/en-us/library/dn876735.aspx)
+- [Speak](https://msdn.microsoft.com/en-us/library/ff512420.aspx)
 
 
 Unimplement APIs (Yet)
@@ -67,7 +68,6 @@ Unimplement APIs (Yet)
 - [AddTranslationArray](https://msdn.microsoft.com/en-us/library/ff512409.aspx)
 - [BreakSentences](https://msdn.microsoft.com/en-us/library/ff512410.aspx)
 - [GetTranslationsArray](https://msdn.microsoft.com/en-us/library/ff512418.aspx)
-- [Speak](https://msdn.microsoft.com/en-us/library/ff512420.aspx)
 - [TranslateArray](https://msdn.microsoft.com/en-us/library/ff512422.aspx)
 
 

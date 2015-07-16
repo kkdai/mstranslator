@@ -32,6 +32,11 @@ func (c *Client) TransformText(lang, category, text string) (string, error) {
 	return c.translateProvider.TransformText(lang, category, text)
 }
 
+// Returns a wave or mp3 stream of the passed-in text being spoken in the desired language.
+func (c *Client) Speak(text, lang, outFormat string) ([]byte, error) {
+	return c.translateProvider.Speak(text, lang, outFormat)
+}
+
 // Use the Detect Method to identify the language of a selected piece of text.
 func (c *Client) Detect(text string) (string, error) {
 	return c.languageProvider.Detect(text)

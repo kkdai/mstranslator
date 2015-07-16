@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 
 	ms "github.com/kkdai/mstranslator"
 )
@@ -17,6 +18,18 @@ func main() {
 		log.Panicf("Error : %s", err.Error())
 	}
 	fmt.Println(translation)
+
+	//Get Speak audio file stream from server.
+	buf, err := msClient.Speak("Returns a wave or mp3 stream of the passed-in text being spoken in the desired language.", "en", "audio/wav")
+	if err != nil {
+		log.Panicf("Error : %s", err.Error())
+	}
+	fmt.Println("size of buf:", len(buf))
+	fo, err := os.Create("speak_output.wav")
+	defer fo.Close()
+	if _, err := fo.Write(body); err != nil {
+		panic(err)
+	}
 
 	//Try to parse input sentence to figure out what language you input.
 	retLang, err := msClient.Detect("測試中文")
@@ -69,5 +82,4 @@ func main() {
 		log.Panicf("Error : %s", err.Error())
 	}
 	fmt.Println(retGet)
-
 }
