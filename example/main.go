@@ -32,6 +32,13 @@ func main() {
 	}
 	fmt.Println("Server Support Language Codes:", retSupportLangcodes)
 
+	//Get all language support speech by Microsoft Translator.
+	retSupportSpeakcodes, err := msClient.GetLanguagesForSpeak()
+	if err != nil {
+		log.Panicf("Error : %s", err.Error())
+	}
+	fmt.Println("Server Support Speak Language Codes:", retSupportSpeakcodes)
+
 	//Get detail Language Name (ex: en -> English)
 	expectedCodes := []string{"en", "de", "es", "ru", "jp"}
 	retLangName, err := msClient.GetLanguageNames(expectedCodes)

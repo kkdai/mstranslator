@@ -51,3 +51,8 @@ func (c *Client) GetLanguageNames(codes []string) ([]string, error) {
 func (c *Client) GetLanguagesForTranslate() ([]string, error) {
 	return c.languageProvider.GetLanguagesForTranslate()
 }
+
+//Retrieves the languages available for speech synthesis.
+func (c *Client) GetLanguagesForSpeak() ([]string, error) {
+	return c.languageProvider.GetLanguagesForSpeak()
+}

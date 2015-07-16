@@ -155,3 +155,31 @@ func (l *LanguageProvider) GetLanguagesForTranslate() ([]string, error) {
 
 	return retLangs.Strings, nil
 }
+
+func (l *LanguageProvider) GetLanguagesForSpeak() ([]string, error) {
+	token := l.authenicator.GetToken()
+
+	client := &http.Client{}
+	request, err := http.NewRequest("GET", GetLanguagesForSpeakURL, nil)
+	request.Header.Add("Content-Type", "text/plain")
+	request.Header.Add("Authorization", "Bearer "+token)
+
+	response, err := client.Do(request)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+
+	body, err := ioutil.ReadAll(response.Body)
+	defer response.Body.Close()
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+
+	retLangs := &ResponseArray{}
+	err = xml.Unmarshal(body, &retLangs)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+
+	return retLangs.Strings, nil
+}
