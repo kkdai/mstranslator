@@ -27,7 +27,7 @@ func main() {
 	fmt.Println("size of buf:", len(buf))
 	fo, err := os.Create("speak_output.wav")
 	defer fo.Close()
-	if _, err := fo.Write(body); err != nil {
+	if _, err := fo.Write(buf); err != nil {
 		panic(err)
 	}
 
