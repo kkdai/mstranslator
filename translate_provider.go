@@ -8,8 +8,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
-
-	"github.com/st3v/tracerr"
 )
 
 type TranslateProvider struct {
@@ -37,19 +35,19 @@ func (t *TranslateProvider) Translate(text, from, to string) (string, error) {
 
 	response, err := client.Do(request)
 	if err != nil {
-		return "", tracerr.Wrap(err)
+		return "", err
 	}
 
 	body, err := ioutil.ReadAll(response.Body)
 	defer response.Body.Close()
 	if err != nil {
-		return "", tracerr.Wrap(err)
+		return "", err
 	}
 
 	translation := &ResponseXML{}
 	err = xml.Unmarshal(body, &translation)
 	if err != nil {
-		return "", tracerr.Wrap(err)
+		return "", err
 	}
 
 	return translation.Value, nil
@@ -72,13 +70,13 @@ func (t *TranslateProvider) TransformText(lang, category, text string) (string, 
 
 	response, err := client.Do(request)
 	if err != nil {
-		return "", tracerr.Wrap(err)
+		return "", err
 	}
 
 	body, err := ioutil.ReadAll(response.Body)
 	defer response.Body.Close()
 	if err != nil {
-		return "", tracerr.Wrap(err)
+		return "", err
 	}
 
 	// Microsoft Server json response contain BOM, need to trim.
@@ -87,7 +85,7 @@ func (t *TranslateProvider) TransformText(lang, category, text string) (string, 
 	transTransform := TransformTextResponse{}
 	err = json.Unmarshal(body, &transTransform)
 	if err != nil {
-		return "", tracerr.Wrap(err)
+		return "", err
 	}
 
 	return transTransform.Sentence, nil
@@ -110,13 +108,13 @@ func (t *TranslateProvider) Speak(text, lang, outFormat string) ([]byte, error) 
 	var retbuf []byte
 	response, err := client.Do(request)
 	if err != nil {
-		return retbuf, tracerr.Wrap(err)
+		return retbuf, err
 	}
 
 	body, err := ioutil.ReadAll(response.Body)
 	defer response.Body.Close()
 	if err != nil {
-		return retbuf, tracerr.Wrap(err)
+		return retbuf, err
 	}
 
 	return body, nil

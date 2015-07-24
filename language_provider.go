@@ -7,8 +7,6 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-
-	"github.com/st3v/tracerr"
 )
 
 type LanguageProvider struct {
@@ -42,19 +40,19 @@ func (l *LanguageProvider) Detect(text string) (string, error) {
 
 	response, err := client.Do(request)
 	if err != nil {
-		return "", tracerr.Wrap(err)
+		return "", err
 	}
 
 	body, err := ioutil.ReadAll(response.Body)
 	defer response.Body.Close()
 	if err != nil {
-		return "", tracerr.Wrap(err)
+		return "", err
 	}
 
 	retDetect := &ResponseXML{}
 	err = xml.Unmarshal(body, &retDetect)
 	if err != nil {
-		return "", tracerr.Wrap(err)
+		return "", err
 	}
 
 	return retDetect.Value, nil
@@ -72,19 +70,19 @@ func (l *LanguageProvider) DetectArray(text []string) ([]string, error) {
 
 	response, err := client.Do(request)
 	if err != nil {
-		return nil, tracerr.Wrap(err)
+		return nil, err
 	}
 
 	body, err := ioutil.ReadAll(response.Body)
 	defer response.Body.Close()
 	if err != nil {
-		return nil, tracerr.Wrap(err)
+		return nil, err
 	}
 
 	retDetect := &ResponseArray{}
 	err = xml.Unmarshal(body, &retDetect)
 	if err != nil {
-		return nil, tracerr.Wrap(err)
+		return nil, err
 	}
 
 	return retDetect.Strings, nil
@@ -108,19 +106,19 @@ func (l *LanguageProvider) GetTranslations(text, from, to string, maxTranslation
 
 	response, err := client.Do(request)
 	if err != nil {
-		return nil, tracerr.Wrap(err)
+		return nil, err
 	}
 
 	body, err := ioutil.ReadAll(response.Body)
 	defer response.Body.Close()
 	if err != nil {
-		return nil, tracerr.Wrap(err)
+		return nil, err
 	}
 
 	xmlResult := GetTranslationsResponse{}
 	err = xml.Unmarshal(body, &xmlResult)
 	if err != nil {
-		return nil, tracerr.Wrap(err)
+		return nil, err
 	}
 
 	return xmlResult.Translations.TransMatch, nil
@@ -140,19 +138,19 @@ func (l *LanguageProvider) GetLanguageNames(codes []string) ([]string, error) {
 
 	response, err := client.Do(request)
 	if err != nil {
-		return nil, tracerr.Wrap(err)
+		return nil, err
 	}
 
 	body, err := ioutil.ReadAll(response.Body)
 	defer response.Body.Close()
 	if err != nil {
-		return nil, tracerr.Wrap(err)
+		return nil, err
 	}
 
 	retLangs := &ResponseArray{}
 	err = xml.Unmarshal(body, &retLangs)
 	if err != nil {
-		return nil, tracerr.Wrap(err)
+		return nil, err
 	}
 
 	return retLangs.Strings, nil
@@ -168,19 +166,19 @@ func (l *LanguageProvider) GetLanguagesForTranslate() ([]string, error) {
 
 	response, err := client.Do(request)
 	if err != nil {
-		return nil, tracerr.Wrap(err)
+		return nil, err
 	}
 
 	body, err := ioutil.ReadAll(response.Body)
 	defer response.Body.Close()
 	if err != nil {
-		return nil, tracerr.Wrap(err)
+		return nil, err
 	}
 
 	retLangs := &ResponseArray{}
 	err = xml.Unmarshal(body, &retLangs)
 	if err != nil {
-		return nil, tracerr.Wrap(err)
+		return nil, err
 	}
 
 	return retLangs.Strings, nil
@@ -196,19 +194,19 @@ func (l *LanguageProvider) GetLanguagesForSpeak() ([]string, error) {
 
 	response, err := client.Do(request)
 	if err != nil {
-		return nil, tracerr.Wrap(err)
+		return nil, err
 	}
 
 	body, err := ioutil.ReadAll(response.Body)
 	defer response.Body.Close()
 	if err != nil {
-		return nil, tracerr.Wrap(err)
+		return nil, err
 	}
 
 	retLangs := &ResponseArray{}
 	err = xml.Unmarshal(body, &retLangs)
 	if err != nil {
-		return nil, tracerr.Wrap(err)
+		return nil, err
 	}
 
 	return retLangs.Strings, nil
