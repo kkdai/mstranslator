@@ -23,7 +23,7 @@ How to use it
 
 Sign-up for Microsoft Translator API (see [here](http://blogs.msdn.com/b/translation/p/gettingstarted1.aspx) for more detail) and get your developer credentials. Use the client ID and secret to instantiate a translator as shown below.
 
-
+```go
         package main
         
         import (
@@ -43,6 +43,7 @@ Sign-up for Microsoft Translator API (see [here](http://blogs.msdn.com/b/transla
         	}
         	fmt.Println(translation) //Hallo Welt!        
         }
+```
 
 Check [example](example/main.go) for more detail.
 
