@@ -48,6 +48,11 @@ Sign-up for Microsoft Translator API (see [here](http://blogs.msdn.com/b/transla
 Check [example](example/main.go) for more detail.
 
 
+Example on mstranslator
+---------------
+![image](snapshot/example.png)
+
+
 Implemented APIs
 ---------------
 
