@@ -88,6 +88,11 @@ Inspired
 
 This project is inspired by [https://github.com/st3v/translator](https://github.com/st3v/translator). 
 
+Project52
+---------------
+
+It is one of my [project 52](https://github.com/kkdai/project52).
+
 
 License
 ---------------
